@@ -1,7 +1,8 @@
 package org.bob.sybsync;
 
-import java.io.File;
-import java.io.IOException;
+import org.bob.sybsync.ui.MainForm;
+
+import java.io.*;
 
 /**
  * @author Babak Eghbali (Bob)
@@ -9,10 +10,20 @@ import java.io.IOException;
  */
 public class App {
     public static void main(String[] args) throws IOException {
-        System.out.println("Hello!");
-        File file = new File("C:\\_sub\\Redbad.2018.1080p.WEB-DL.H264.AC3-EVO.srt");
+        System.out.println("Welcome to SubSync!");
+        //testShifter();
+        new MainForm().start();
+    }
+
+    private static void testShifter() throws IOException {
+        File inputFile = new File("C:\\_sub\\Redbad.2018.1080p.WEB-DL.H264.AC3-EVO.srt");
         SubtitleService service = new SubtitleServiceImpl();
-        StringBuilder sb = service.shift(file, 10);
+        StringBuilder sb = service.shift(inputFile, 10);
         System.out.println(sb.toString());
+        File outputFile = new File(inputFile.getAbsolutePath()+"(1)");
+        FileOutputStream fout = new FileOutputStream(outputFile);
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile))) {
+            writer.append(sb);
+        }
     }
 }
