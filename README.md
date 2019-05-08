@@ -1,2 +1,2 @@
 # subsync
-Tiny subtitle synchronise
+Tiny subtitle synchroniser
